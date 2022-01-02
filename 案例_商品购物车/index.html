@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品购物车案例</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="app" v-cloak>
+        <template v-if="list.length">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>商品名称</th>
+                        <th>商品单价</th>
+                        <th>购买数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, index) in list">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ item.name }}</td>
+                        <!-- <td>{{ getFinalPrice(item.price) }}</td> -->
+                        <td>{{ item.price | showPrice }}</td>
+                        <td>
+                            <button v-on:click="handleReduce(index)"
+                            v-bind:disabled="item.count === 1">-</button>
+                            {{ item.count }}
+                            <button @click="handleAdd(index)">+</button>
+                        </td>
+                        <td>
+                            <button @click="handleRemove(index)">移除</button>
+                        </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+            <h2>总价格 <span>{{ totalPrice | showPrice }}</span></h2>
+        </template>
+
+        <div v-else=>购物车为空。。。</div>
+    </div>
+      <!-- 自动识别最新稳定版本的 Vue -->
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+     <!-- 指定某个具体版本的 Vue  -->
+    <!-- <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>     -->
+    
+    <script src="./main.js"></script>
+</body>
+</html>
+
+<!-- icarusion/vue-book  -->
